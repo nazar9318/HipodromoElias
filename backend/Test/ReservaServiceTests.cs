@@ -107,7 +107,6 @@ namespace HipodromoAPI.Tests
             var fechaReserva = DateTime.Now;
 
             _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, fechaReserva, 1);
-            //Total de cubiertos: 18*2 + 15*4 + 7*6 = 138
             for (int i = 2; i <= 145; i++)
             {
                 _reservaService.CrearReserva(i, "Diamond", fechaReserva, 1);

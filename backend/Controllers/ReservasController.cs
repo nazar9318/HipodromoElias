@@ -17,7 +17,7 @@ namespace HipodromoAPI.Controllers
         }
 
         [HttpPost]
-        public IActionResult CrearReserva([FromBody] ReservaDto reservaDto)
+        public ActionResult CrearReserva([FromBody] ReservaDto reservaDto)
         {
             var reserva = _reservaService.CrearReserva(reservaDto.NumeroCliente, reservaDto.CategoriaCliente, reservaDto.FechaReserva, reservaDto.CantidadPersonas);
             if (reserva.NumeroMesa.HasValue)
@@ -41,21 +41,21 @@ namespace HipodromoAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObtenerReservas()
+        public ActionResult ObtenerReservas()
         {
             var reservas = _reservaService.ObtenerReservas();
             return Ok(reservas);
         }
 
         [HttpGet("lista-espera")]
-        public IActionResult ObtenerListaEspera()
+        public ActionResult ObtenerListaEspera()
         {
             var listaEspera = _reservaService.ObtenerListaEspera();
             return Ok(listaEspera);
         }
 
         [HttpDelete("{id}")]
-        public IActionResult EliminarReserva(int id)
+        public ActionResult EliminarReserva(int id)
         {
             _reservaService.EliminarReserva(id);
             return NoContent();

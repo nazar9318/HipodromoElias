@@ -40,6 +40,7 @@ public class ReservaService : IReservaService
             mesaDisponible.Reservar(cantidadPersonas);
             reserva.NumeroMesa = mesaDisponible.NumeroMesa;
             reserva.EnListaEspera = false;
+            reservas.Add(reserva);
         }
         // Añadir a la lista de espera si no hay mesas disponibles
         else
@@ -48,7 +49,6 @@ public class ReservaService : IReservaService
             listaEspera.Add(reserva);
         }
 
-        reservas.Add(reserva);
         return reserva;
     }
 
