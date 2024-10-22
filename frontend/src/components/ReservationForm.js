@@ -3,6 +3,7 @@ import ReservationService from '../services/ReservationService';
 import WaitlistForm from './WaitlistForm';
 
 const ReservationForm = () => {
+    const [numCliente, setNumCliente] = useState('');
     const [numPersonas, setNumPersonas] = useState('');
     const [categoria, setCategoria] = useState('');
     const [mensaje, setMensaje] = useState('');
@@ -11,7 +12,7 @@ const ReservationForm = () => {
     const manejarReserva = async (e) => {
         e.preventDefault();
         try {
-            const resultado = await ReservationService.crearReserva(numPersonas, categoria);
+            const resultado = await ReservationService.crearReserva(numCliente, categoria, new Date().toISOString(), numPersonas);
             setMensaje(`Reserva confirmada en la mesa ${resultado.numeroMesa}`);
         } catch (error) {
             setAgregarAListaEspera(true);
@@ -21,6 +22,10 @@ const ReservationForm = () => {
     return (
         <div>
             <form onSubmit={manejarReserva}>
+                <div>
+                    <label>Número de Cliente:</label>
+                    <input type="number" value={numCliente} onChange={(e) => setNumCliente(e.target.value)} required />
+                </div>
                 <div>
                     <label>Número de Personas:</label>
                     <input type="number" value={numPersonas} onChange={(e) => setNumPersonas(e.target.value)} required />

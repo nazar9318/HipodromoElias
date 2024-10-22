@@ -22,9 +22,9 @@ const ReservationPage = () => {
         setListaEspera(listaEsperaData);
     };
 
-    const handleNuevaReserva = async (numPersonas, categoria) => {
+    const handleNuevaReserva = async (numeroCliente, numPersonas, categoria) => {
         try {
-            const reservaData = await ReservationService.crearReserva(numPersonas, categoria);
+            const reserva = await ReservationService.crearReserva(numeroCliente, categoria, new Date().toISOString(), numPersonas);
             cargarReservas();
         } catch (error) {
             if (error.mensaje === "No hay mesas disponibles, ¿quieres agregar a la lista de espera?") {

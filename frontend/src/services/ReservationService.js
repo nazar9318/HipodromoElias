@@ -4,13 +4,18 @@ const baseUrl = 'http://localhost:5000/api/reservas';
 
 class ReservationService {
 
-    async crearReserva(numPersonas, categoria) {
-        const response = await axios.post(`${baseUrl}`, { numPersonas, categoria });
+    async crearReserva(numeroCliente, categoriaCliente, fechaReserva, cantidadPersonas) {
+        const response = await axios.post(`${baseUrl}`, {
+            numeroCliente: numeroCliente,
+            categoriaCliente: categoriaCliente,
+            fechaReserva: fechaReserva,
+            cantidadPersonas: cantidadPersonas
+        });
         return response.data;
     }
 
-    async agregarAListaEspera(numPersonas, categoria) {
-        const response = await axios.post(`${baseUrl}/waitlist`, { numPersonas, categoria });
+    async agregarAListaEspera(numeroCliente, cantidadPersonas, categoriaCliente) {
+        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, cantidadPersonas, categoriaCliente });
         return response.data;
     }
 
@@ -20,7 +25,7 @@ class ReservationService {
     }
 
     async obtenerListaEspera() {
-        const response = await axios.get(`${baseUrl}/waitlist`);
+        const response = await axios.get(`${baseUrl}/lista-espera`);
         return response.data;
     }
 }

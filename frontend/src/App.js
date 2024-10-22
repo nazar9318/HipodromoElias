@@ -1,5 +1,5 @@
 import React from 'react';
-import ReservationPage from './components/ReservationPage';
+import ReservationPage from './pages/ReservationPage';
 
 function App() {
     return (

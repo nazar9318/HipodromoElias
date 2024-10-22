@@ -52,6 +52,20 @@ public class ReservaService : IReservaService
         return reserva;
     }
 
+    public Reserva AgregarAListaEspera(int numeroCliente, string categoriaCliente, int cantidadPersonas)
+    {
+        var reserva = new Reserva
+        {
+            Id = reservas.Count + 1,
+            NumeroCliente = numeroCliente,
+            CategoriaCliente = categoriaCliente,
+            EnListaEspera = true,
+            CantidadPersonas = cantidadPersonas
+        };
+        listaEspera.Add(reserva);
+        return reserva;
+    }
+
     public bool EliminarReserva(int idReserva)
     {
         var reserva = reservas.FirstOrDefault(r => r.Id == idReserva);

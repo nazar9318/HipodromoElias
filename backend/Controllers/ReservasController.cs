@@ -40,6 +40,17 @@ namespace HipodromoAPI.Controllers
             }
         }
 
+        [HttpPost("lista-espera")]
+        public ActionResult AgregarAListaEspera([FromBody] ReservaDto reservaDto)
+        {
+            _reservaService.AgregarAListaEspera(reservaDto.NumeroCliente, reservaDto.CategoriaCliente, reservaDto.CantidadPersonas);
+            return Ok(new
+            {
+                exito = true,
+                mensaje = "Agregado a Lista de Espera"
+            });
+        }
+
         [HttpGet]
         public ActionResult ObtenerReservas()
         {

@@ -24,6 +24,7 @@
 bin/
 obj/
 TestResults/
+node_modules/
 
 # User-specific files
 *.rsuser
