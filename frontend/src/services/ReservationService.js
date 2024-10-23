@@ -13,9 +13,9 @@ class ReservationService {
         });
         return response.data;
     }
-
-    async agregarAListaEspera(numeroCliente, cantidadPersonas, categoriaCliente) {
-        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, cantidadPersonas, categoriaCliente });
+    
+    async agregarAListaEspera(numeroCliente, categoriaCliente, cantidadPersonas) {
+        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, categoriaCliente, cantidadPersonas });
         return response.data;
     }
 

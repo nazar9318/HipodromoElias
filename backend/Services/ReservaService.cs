@@ -42,12 +42,12 @@ public class ReservaService : IReservaService
             reserva.EnListaEspera = false;
             reservas.Add(reserva);
         }
-        // Añadir a la lista de espera si no hay mesas disponibles
-        else
+        // AÃ±adir a la lista de espera si no hay mesas disponibles
+        /*else
         {
             reserva.EnListaEspera = true;
             listaEspera.Add(reserva);
-        }
+        }*/
 
         return reserva;
     }
@@ -56,7 +56,7 @@ public class ReservaService : IReservaService
     {
         var reserva = new Reserva
         {
-            Id = reservas.Count + 1,
+            Id = listaEspera.Count + 1,
             NumeroCliente = numeroCliente,
             CategoriaCliente = categoriaCliente,
             EnListaEspera = true,
@@ -76,7 +76,7 @@ public class ReservaService : IReservaService
 
         reservas.Remove(reserva);
 
-        // Liberar mesa si tenía una asignada
+        // Liberar mesa si tenï¿½a una asignada
         if (reserva.NumeroMesa.HasValue)
         {
             var mesaLiberada = mesas.FirstOrDefault(m => m.NumeroMesa == reserva.NumeroMesa.Value);
@@ -85,7 +85,7 @@ public class ReservaService : IReservaService
                 mesaLiberada.Liberar(reserva.CantidadPersonas);
             }
 
-            // Reasignar la mesa al cliente en la lista de espera más prioritario
+            // Reasignar la mesa al cliente en la lista de espera mï¿½s prioritario
             if (listaEspera.Any())
             {
                 var reservaEnEspera = listaEspera.OrderBy(c => c.CategoriaCliente).First();

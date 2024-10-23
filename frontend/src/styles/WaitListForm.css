@@ -1,0 +1,54 @@
+.waitlist-container {
+    padding: 20px;
+    background-color: #fff3cd;
+    border-radius: 8px;
+    border: 1px solid #ffeeba;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.waitlist-container p {
+    color: #856404;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.waitlist-container button {
+    padding: 10px 20px;
+    background-color: #ffc107;
+    color: #212529;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+input[type="number"]:focus, input[type="date"]:focus, select:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.waitlist-container button:hover {
+    background-color: #e0a800;
+    transform: translateY(-2px);
+}
+
+.waitlist-container button:active {
+    background-color: #d39e00;
+    transform: translateY(0);
+}
+
+.waitlist-container .cancel-button {
+    background-color: #dc3545;
+    color: white;
+}
+
+.waitlist-container .cancel-button:hover {
+    background-color: #c82333;
+}
+
+.waitlist-container .cancel-button:active {
+    background-color: #bd2130;
+}

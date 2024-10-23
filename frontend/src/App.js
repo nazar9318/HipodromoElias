@@ -4,7 +4,7 @@ import ReservationPage from './pages/ReservationPage';
 function App() {
     return (
         <div className="App">
-            <h1>Reservas en el Restaurante</h1>
+            <h1>¡Bienvenido a HipodromoElias! A continuación podrá realizar reservaciones, ver las reservas ya hechas, y ver la lista de espera.</h1>
             <ReservationPage />
         </div>
     );
