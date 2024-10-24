@@ -2,11 +2,13 @@ import React from 'react';
 import ReservationService from '../services/ReservationService';
 import '../styles/WaitListForm.css';
 
-const WaitlistForm = ({ numCliente, numPersonas, categoria, setAgregarAListaEspera }) => {
+const WaitlistForm = ({ numCliente, numPersonas, fecha, categoria, setAgregarAListaEspera, cargarListaEspera, cargarReservas }) => {
     const manejarListaEspera = async () => {
-        await ReservationService.agregarAListaEspera(numCliente, categoria, numPersonas);
+        await ReservationService.agregarAListaEspera(numCliente, categoria, fecha, numPersonas);
         alert('Ha sido agregado a la lista de espera.');
         setAgregarAListaEspera(false);
+        cargarListaEspera();
+        cargarReservas();
     };
 
     return (
