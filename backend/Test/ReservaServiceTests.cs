@@ -1,4 +1,5 @@
 ﻿using HipodromoApi.Constants;
+using HipodromoApi.Services;
 using HipodromoAPI.Exceptions;
 using System;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace HipodromoAPI.Tests
             var categoriaCliente = "Diamond";
             var fechaReserva = DateTime.Now;
             
-            var reserva = _reservaService.CrearReserva(numeroCliente, categoriaCliente, fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, categoriaCliente, "Federico", fechaReserva, 1);
 
             Assert.NotNull(reserva.NumeroMesa);
             Assert.False(reserva.EnListaEspera);
@@ -35,12 +36,12 @@ namespace HipodromoAPI.Tests
             var categoriaCliente1 = "Diamond";
             var fechaReserva = DateTime.Now;
 
-            _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, fechaReserva, 1);
+            _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, "Federico", fechaReserva, 1);
             for (int i = 2; i <= 144; i++)
             {
-                _reservaService.CrearReserva(i, "Diamond", fechaReserva, 1);
+                _reservaService.CrearReserva(i, "Diamond", "Federico", fechaReserva, 1);
             }
-            var reservaEnEspera = _reservaService.CrearReserva(145, "Diamond", fechaReserva, 1);
+            var reservaEnEspera = _reservaService.CrearReserva(145, "Diamond", "Federico", fechaReserva, 1);
 
             Assert.True(reservaEnEspera.EnListaEspera);
             Assert.Null(reservaEnEspera.NumeroMesa);
@@ -52,7 +53,7 @@ namespace HipodromoAPI.Tests
             var numeroCliente = 1;
             var categoriaCliente = "Diamond";
             var fechaReserva = DateTime.Now;
-            var reserva = _reservaService.CrearReserva(numeroCliente, categoriaCliente, fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, categoriaCliente, "Federico", fechaReserva, 1);
             var reservaId = reserva.Id;
 
             var result = _reservaService.EliminarReserva(reservaId);
@@ -76,10 +77,10 @@ namespace HipodromoAPI.Tests
             var categoriaCliente = "Diamond";
             var fechaReserva = DateTime.Now;
 
-            _reservaService.CrearReserva(numeroCliente, categoriaCliente, fechaReserva, 1);
+            _reservaService.CrearReserva(numeroCliente, categoriaCliente, "Federico", fechaReserva, 1);
 
             var exception = Assert.Throws<ReservaDuplicadaException>(() =>
-                _reservaService.CrearReserva(numeroCliente, categoriaCliente, fechaReserva, 1)
+                _reservaService.CrearReserva(numeroCliente, categoriaCliente, "Federico", fechaReserva, 1)
             );
 
             Assert.Equal("El cliente ya tiene una reserva para esta fecha.", exception.Message);
@@ -92,7 +93,7 @@ namespace HipodromoAPI.Tests
             var categoriaCliente = "Diamond";
             var fechaReserva = DateTime.Now;
 
-            _reservaService.CrearReserva(numeroCliente, categoriaCliente, fechaReserva, 1);
+            _reservaService.CrearReserva(numeroCliente, categoriaCliente, "Federico", fechaReserva, 1);
             var reservas = _reservaService.ObtenerReservas();
 
             Assert.Single(reservas);
@@ -106,10 +107,10 @@ namespace HipodromoAPI.Tests
             var categoriaCliente1 = "Diamond";
             var fechaReserva = DateTime.Now;
 
-            _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, fechaReserva, 1);
+            _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, "Federico", fechaReserva, 1);
             for (int i = 2; i <= 145; i++)
             {
-                _reservaService.CrearReserva(i, "Diamond", fechaReserva, 1);
+                _reservaService.CrearReserva(i, "Diamond", "Federico", fechaReserva, 1);
             }
             var listaEspera = _reservaService.ObtenerListaEspera();
 
@@ -125,11 +126,11 @@ namespace HipodromoAPI.Tests
             var categoriaCliente1 = "Diamond";
             var fechaReserva = DateTime.Now;
 
-            var reserva1 = _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, fechaReserva, 1);
+            var reserva1 = _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, "Federico", fechaReserva, 1);
             
             for (int i = 2; i <= 145; i++)
             {
-                _reservaService.CrearReserva(i, "Diamond", fechaReserva, 1);
+                _reservaService.CrearReserva(i, "Diamond", "Federico", fechaReserva, 1);
             }
 
             var waitlist = _reservaService.ObtenerListaEspera();
@@ -145,7 +146,7 @@ namespace HipodromoAPI.Tests
             var fechaReserva = DateTime.Now.AddHours(48);
             var numeroCliente = 1;
 
-            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Classic.ToString(), fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Classic.ToString(), "Federico", fechaReserva, 1);
 
             Assert.NotNull(reserva);
         }
@@ -156,7 +157,7 @@ namespace HipodromoAPI.Tests
             var fechaReserva = DateTime.Now.AddHours(72);
             var numeroCliente = 2;
 
-            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Gold.ToString(), fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Gold.ToString(), "Federico", fechaReserva, 1);
 
             Assert.NotNull(reserva);
         }
@@ -167,7 +168,7 @@ namespace HipodromoAPI.Tests
             var fechaReserva = DateTime.Now.AddHours(96);
             var numeroCliente = 3;
 
-            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Platinum.ToString(), fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Platinum.ToString(), "Federico", fechaReserva, 1);
 
             Assert.NotNull(reserva);
         }
@@ -178,7 +179,7 @@ namespace HipodromoAPI.Tests
             var fechaReserva = DateTime.Now;
             var numeroCliente = 4;
 
-            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Diamond.ToString(), fechaReserva, 1);
+            var reserva = _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Diamond.ToString(), "Federico", fechaReserva, 1);
 
             Assert.NotNull(reserva);
         }
@@ -190,7 +191,7 @@ namespace HipodromoAPI.Tests
             var numeroCliente = 5;
 
             var exception = Assert.Throws<CategoriaInvalidaException>(() =>
-                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Classic.ToString(), fechaReserva, 1)
+                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Classic.ToString(), "Federico", fechaReserva, 1)
             );
 
             Assert.Equal("El cliente no tiene la categoría que corresponde para reservar en la fecha indicada.", exception.Message);
@@ -203,7 +204,7 @@ namespace HipodromoAPI.Tests
             var numeroCliente = 6;
 
             var exception = Assert.Throws<CategoriaInvalidaException>(() =>
-                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Gold.ToString(), fechaReserva, 1)
+                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Gold.ToString(), "Federico", fechaReserva, 1)
             );
 
             Assert.Equal("El cliente no tiene la categoría que corresponde para reservar en la fecha indicada.", exception.Message);
@@ -216,7 +217,7 @@ namespace HipodromoAPI.Tests
             var numeroCliente = 7;
             
             var exception = Assert.Throws<CategoriaInvalidaException>(() =>
-                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Platinum.ToString(), fechaReserva, 1)
+                _reservaService.CrearReserva(numeroCliente, CategoriaConstants.Platinum.ToString(), "Federico", fechaReserva, 1)
             );
 
             Assert.Equal("El cliente no tiene la categoría que corresponde para reservar en la fecha indicada.", exception.Message);

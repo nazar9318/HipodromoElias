@@ -7,14 +7,13 @@ const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
     const [numCliente, setNumCliente] = useState('');
     const [numPersonas, setNumPersonas] = useState('');
     const [fecha, setFecha] = useState('');
-    const [categoria, setCategoria] = useState('');
     const [mensaje, setMensaje] = useState('');
     const [agregarAListaEspera, setAgregarAListaEspera] = useState(false);
 
     const manejarReserva = async (e) => {
         e.preventDefault();
         try {
-            const resultado = await ReservationService.crearReserva(numCliente, categoria, fecha, numPersonas);
+            const resultado = await ReservationService.crearReserva(numCliente, fecha, numPersonas);
             if (resultado.exito) {
                 setMensaje(`Reserva confirmada en la mesa ${resultado.numeroMesa}`);
             }
@@ -62,16 +61,6 @@ const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
                         min={1}
                     />
                 </div>
-                <div>
-                    <label>Categoría:</label>
-                    <select style={{width: '99%'}} value={categoria} onChange={(e) => setCategoria(e.target.value)} required>
-                        <option value="">Seleccionar</option>
-                        <option value="Classic">Classic</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Platinum">Platinum</option>
-                        <option value="Diamond">Diamond</option>
-                    </select>
-                </div>
                 <button type="submit">Reservar</button>
                 {mensaje && <p>{mensaje}</p>}
             </form>
@@ -79,7 +68,6 @@ const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
             {agregarAListaEspera && <WaitlistForm
                 numCliente={numCliente}
                 numPersonas={numPersonas}
-                categoria={categoria}
                 setAgregarAListaEspera={setAgregarAListaEspera}
                 cargarListaEspera={cargarListaEspera}
                 cargarReservas={cargarReservas}

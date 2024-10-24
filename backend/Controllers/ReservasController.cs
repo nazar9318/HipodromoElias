@@ -1,4 +1,5 @@
-﻿using HipodromoAPI.Dtos;
+﻿using HipodromoApi.Services;
+using HipodromoAPI.Dtos;
 using HipodromoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -10,16 +11,19 @@ namespace HipodromoAPI.Controllers
     public class ReservasController : ControllerBase
     {
         private readonly ReservaService _reservaService;
+        private readonly ClienteService _clienteService;
 
-        public ReservasController(ReservaService reservaService)
+        public ReservasController(ClienteService clienteService, ReservaService reservaService)
         {
             _reservaService = reservaService;
+            _clienteService = clienteService;
         }
 
         [HttpPost]
         public ActionResult CrearReserva([FromBody] ReservaDto reservaDto)
         {
-            var reserva = _reservaService.CrearReserva(reservaDto.NumeroCliente, reservaDto.CategoriaCliente, reservaDto.FechaReserva, reservaDto.CantidadPersonas);
+            var cliente = _clienteService.Buscar(reservaDto.NumeroCliente);
+            var reserva = _reservaService.CrearReserva(reservaDto.NumeroCliente, cliente.Categoria, cliente.Nombre, reservaDto.FechaReserva, reservaDto.CantidadPersonas);
             if (reserva.NumeroMesa.HasValue)
             {
                 return Ok(new
@@ -43,7 +47,8 @@ namespace HipodromoAPI.Controllers
         [HttpPost("lista-espera")]
         public ActionResult AgregarAListaEspera([FromBody] ReservaDto reservaDto)
         {
-            _reservaService.AgregarAListaEspera(reservaDto.NumeroCliente, reservaDto.CategoriaCliente, reservaDto.FechaReserva, reservaDto.CantidadPersonas);
+            var cliente = _clienteService.Buscar(reservaDto.NumeroCliente);
+            _reservaService.AgregarAListaEspera(reservaDto.NumeroCliente, cliente.Categoria, cliente.Nombre, reservaDto.FechaReserva, reservaDto.CantidadPersonas);
             return Ok(new
             {
                 exito = true,

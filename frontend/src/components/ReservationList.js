@@ -14,7 +14,7 @@ const ReservationList = ({ reservas }) => {
         <ul>
             {reservas.map((reserva) => (
                 <li key={reserva.id}>
-                    Cliente: {reserva.numeroCliente}, Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'}, Fecha: {formatearFecha(reserva.fechaReserva)}
+                    Cliente: {reserva.nombreCliente}, Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'}, Fecha: {formatearFecha(reserva.fechaReserva)}
                 </li>
             ))}
         </ul>

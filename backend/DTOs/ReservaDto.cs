@@ -5,7 +5,6 @@ namespace HipodromoAPI.Dtos
     public class ReservaDto
     {
         public int NumeroCliente { get; set; }
-        public string CategoriaCliente { get; set; }
         public DateTime FechaReserva { get; set; }
         public int CantidadPersonas { get; set; }
     }

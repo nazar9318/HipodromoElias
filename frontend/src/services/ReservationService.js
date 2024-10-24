@@ -3,13 +3,12 @@ import axios from 'axios';
 const baseUrl = 'http://localhost:5000/api/reservas';
 
 class ReservationService {
-    async crearReserva(numeroCliente, categoriaCliente, fechaReserva, cantidadPersonas) {
+    async crearReserva(numeroCliente, fechaReserva, cantidadPersonas) {
         try {
             const response = await axios.post(`${baseUrl}`, {
                 numeroCliente: numeroCliente,
-                categoriaCliente: categoriaCliente,
                 fechaReserva: fechaReserva,
-                cantidadPersonas: cantidadPersonas
+                cantidadPersonas: cantidadPersonas,
             });
             return response.data;
         } catch (error) {
@@ -24,8 +23,8 @@ class ReservationService {
         }
     };
     
-    async agregarAListaEspera(numeroCliente, categoriaCliente, fechaReserva, cantidadPersonas) {
-        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, categoriaCliente, fechaReserva, cantidadPersonas });
+    async agregarAListaEspera(numeroCliente, fechaReserva, cantidadPersonas) {
+        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, fechaReserva, cantidadPersonas });
         return response.data;
     }
 

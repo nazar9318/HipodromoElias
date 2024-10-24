@@ -1,3 +1,4 @@
+using HipodromoApi.Services;
 using HipodromoAPI.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,8 @@ namespace HipodromoApi
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HipodromoApi", Version = "v1" });
             });
             services.AddSingleton<ReservaService>(); 
+            services.AddSingleton<ClienteService>();
+            services.AddSingleton<MesaService>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>

@@ -2,13 +2,20 @@ using HipodromoApi.Constants;
 using HipodromoAPI.Models;
 using System.Linq;
 
-namespace NombreDelProyecto.Services
+namespace HipodromoApi.Services
 {
-    public class MesaService
+    public class MesaService : IMesaService
     {
         public Mesa AsignarMesa(int numeroCubiertos)
         {
-            return MesaConstants.Mesas.FirstOrDefault(m => m.Cubiertos == numeroCubiertos && !m.Ocupada());
+            var mesaDisponible = MesaConstants.Mesas.FirstOrDefault(m => m.Soporta(numeroCubiertos) && !m.Ocupada());
+            mesaDisponible.Reservar(numeroCubiertos);
+            return mesaDisponible;
+        }
+
+        public Mesa BuscarMesa(int numeroMesa)
+        {
+            return MesaConstants.Mesas.FirstOrDefault(m => m.NumeroMesa == numeroMesa);
         }
 
         public void LiberarMesa(int mesaId, int numeroCubiertos)

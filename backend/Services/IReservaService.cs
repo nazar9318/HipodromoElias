@@ -5,10 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public interface IReservaService
+namespace HipodromoApi.Services
 {
-    Reserva CrearReserva(int numeroCliente, string categoriaCliente, DateTime fechaReserva, int cantidadPersonas);
-    List<Reserva> ObtenerReservas();
-    List<Reserva> ObtenerListaEspera();
-    bool EliminarReserva(int idReserva);
+    public interface IReservaService
+    {
+        Reserva CrearReserva(int numeroCliente, string categoriaCliente, string nombre, DateTime fechaReserva, int cantidadPersonas);
+        List<Reserva> ObtenerReservas();
+        List<Reserva> ObtenerListaEspera();
+        bool EliminarReserva(int idReserva);
+        Reserva AgregarAListaEspera(int numeroCliente, string categoriaCliente, string nombre, DateTime fechaReserva, int cantidadPersonas);
+    }
 }
