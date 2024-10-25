@@ -48,7 +48,6 @@ class ReservationService {
     }
 
     async login(nombre, numero) {
-        console.log('Datos a enviar:', nombre, numero);
         const response = await axios.post(`${baseUrl}/login`, {
             nombreLogin: nombre,
             numeroCliente: numero,

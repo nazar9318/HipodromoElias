@@ -24,7 +24,6 @@ namespace HipodromoAPI.Controllers
         [HttpPost("login")]
         public ActionResult Login([FromBody] LoginRequest request)
         {
-            Console.WriteLine($"Nombre: {request.NombreLogin}, Número de Cliente: {request.NumeroCliente}");
             if (!_clienteService.ClienteExiste(request.NumeroCliente, request.NombreLogin))
             {
                 return Unauthorized(new { mensaje = "Credenciales incorrectas" });
