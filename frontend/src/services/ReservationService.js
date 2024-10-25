@@ -37,6 +37,11 @@ class ReservationService {
         const response = await axios.get(`${baseUrl}/lista-espera`);
         return response.data;
     }
+
+    async eliminarReserva(id) {
+        const response = await axios.delete(`${baseUrl}/${id}`);
+        return response.data;
+    }
 }
 
 export default new ReservationService();

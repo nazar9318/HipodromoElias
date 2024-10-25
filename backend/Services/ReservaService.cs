@@ -32,6 +32,7 @@ namespace HipodromoApi.Services
                 NumeroCliente = numeroCliente,
                 FechaReserva = fechaReserva,
                 CategoriaCliente = categoriaCliente,
+                CantidadPersonas = cantidadPersonas,
                 NombreCliente = nombre
             };
 
@@ -42,6 +43,7 @@ namespace HipodromoApi.Services
             {
                 reserva.NumeroMesa = mesaDisponible.NumeroMesa;
                 reserva.EnListaEspera = false;
+                reserva.CantidadPersonas = cantidadPersonas;
                 reservas.Add(reserva);
             }
 
@@ -83,6 +85,8 @@ namespace HipodromoApi.Services
                 if (listaEspera.Any())
                 {
                     var reservaEnEspera = listaEspera.OrderBy(c => c.CategoriaCliente).First();
+                    reservaEnEspera.NumeroMesa = (int)reserva.NumeroMesa;
+                    reservaEnEspera.Id = reservas.Count + 1;
                     reservas.Add(reservaEnEspera);
                     listaEspera.Remove(reservaEnEspera);
                 }

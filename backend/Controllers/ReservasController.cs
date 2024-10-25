@@ -74,7 +74,11 @@ namespace HipodromoAPI.Controllers
         public ActionResult EliminarReserva(int id)
         {
             _reservaService.EliminarReserva(id);
-            return NoContent();
+            return Ok(new
+            {
+                exito = true,
+                mensaje = "Reserva eliminada"
+            });
         }
     }
 }

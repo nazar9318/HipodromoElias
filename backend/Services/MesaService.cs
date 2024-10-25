@@ -9,7 +9,10 @@ namespace HipodromoApi.Services
         public Mesa AsignarMesa(int numeroCubiertos)
         {
             var mesaDisponible = MesaConstants.Mesas.FirstOrDefault(m => m.Soporta(numeroCubiertos) && !m.Ocupada());
-            mesaDisponible.Reservar(numeroCubiertos);
+            if (mesaDisponible != null)
+            {
+                mesaDisponible.Reservar(numeroCubiertos);
+            }
             return mesaDisponible;
         }
 

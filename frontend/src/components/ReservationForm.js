@@ -3,7 +3,7 @@ import ReservationService from '../services/ReservationService';
 import WaitlistForm from './WaitlistForm';
 import '../styles/ReservationForm.css';
 
-const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
+const ReservationForm = () => {
     const [numCliente, setNumCliente] = useState('');
     const [numPersonas, setNumPersonas] = useState('');
     const [fecha, setFecha] = useState('');
@@ -20,12 +20,9 @@ const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
             else {
                 setAgregarAListaEspera(resultado.preguntaListaEspera);
             }
-            cargarReservas();
         } catch (error) {
             setMensaje(error.mensaje);
         }
-        cargarReservas();
-        cargarListaEspera();
     };
 
     return (
@@ -69,8 +66,6 @@ const ReservationForm = ({ cargarReservas, cargarListaEspera }) => {
                 numCliente={numCliente}
                 numPersonas={numPersonas}
                 setAgregarAListaEspera={setAgregarAListaEspera}
-                cargarListaEspera={cargarListaEspera}
-                cargarReservas={cargarReservas}
                 fecha={fecha}
             />}
         </div>
