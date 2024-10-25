@@ -87,7 +87,10 @@ namespace HipodromoApi.Services
                 // Reasignar la mesa al cliente en la lista de espera más prioritario
                 if (listaEspera.Any())
                 {
-                    var reservaEnEspera = listaEspera.OrderBy(r => r.PrioridadCliente).ThenBy(r => r.FechaReserva).First();
+                    var reservaEnEspera = listaEspera
+                                            .Where(r => r.FechaReserva == reserva.FechaReserva)
+                                            .OrderBy(r => r.PrioridadCliente)
+                                            .First();
                     reservaEnEspera.NumeroMesa = (int)reserva.NumeroMesa;
                     reservaEnEspera.Id = reservas.Count + 1;
                     reservas.Add(reservaEnEspera);

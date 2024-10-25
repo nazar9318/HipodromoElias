@@ -20,9 +20,14 @@ namespace HipodromoApi.Services
             return cliente;
         }
 
+        public bool ClienteExiste(int numeroCliente, string nombreCliente)
+        {
+            return (ClienteConstants.Clientes.FirstOrDefault(c => c.Nombre == nombreCliente && c.NumeroCliente == numeroCliente)) != null;
+        }
+
         public string ObtenerNombreCliente(int numeroCliente)
         {
-            return ClienteConstants.Clientes.FirstOrDefault(c => c.NumeroCliente == numeroCliente).Nombre;
+            return Buscar(numeroCliente).Nombre;
         }
     }
 }

@@ -1,8 +1,9 @@
 import React from 'react';
 import '../styles/ReservationList.css';
-
+import { useAuth } from '../AuthContext/AuthContext';
 
 const ReservationList = ({ reservas, eliminarReserva }) => {
+    const { clienteId } = useAuth();
     const formatearFecha = (fechaISO) => {
         const fecha = new Date(fechaISO);
         const dia = String(fecha.getDate()).padStart(2, '0');
@@ -19,7 +20,9 @@ const ReservationList = ({ reservas, eliminarReserva }) => {
                     Categoria: {reserva.categoriaCliente},
                     Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'},
                     Fecha: {formatearFecha(reserva.fechaReserva)}
-                    <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
+                    {reserva.numeroCliente === clienteId && (
+                        <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
+                    )}
                 </li>
             ))}
         </ul>

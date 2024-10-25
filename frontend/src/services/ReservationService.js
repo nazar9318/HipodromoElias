@@ -24,7 +24,11 @@ class ReservationService {
     };
     
     async agregarAListaEspera(numeroCliente, fechaReserva, cantidadPersonas) {
-        const response = await axios.post(`${baseUrl}/lista-espera`, { numeroCliente, fechaReserva, cantidadPersonas });
+        const response = await axios.post(`${baseUrl}/lista-espera`, {
+            numeroCliente,
+            fechaReserva,
+            cantidadPersonas
+        });
         return response.data;
     }
 
@@ -40,6 +44,15 @@ class ReservationService {
 
     async eliminarReserva(id) {
         const response = await axios.delete(`${baseUrl}/${id}`);
+        return response.data;
+    }
+
+    async login(nombre, numero) {
+        console.log('Datos a enviar:', nombre, numero);
+        const response = await axios.post(`${baseUrl}/login`, {
+            nombreLogin: nombre,
+            numeroCliente: numero,
+        });
         return response.data;
     }
 }

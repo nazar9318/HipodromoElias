@@ -1,7 +1,9 @@
-﻿using HipodromoApi.Services;
+﻿using HipodromoApi.Login;
+using HipodromoApi.Services;
 using HipodromoAPI.Dtos;
 using HipodromoAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 
 namespace HipodromoAPI.Controllers
@@ -17,6 +19,18 @@ namespace HipodromoAPI.Controllers
         {
             _reservaService = reservaService;
             _clienteService = clienteService;
+        }
+
+        [HttpPost("login")]
+        public ActionResult Login([FromBody] LoginRequest request)
+        {
+            Console.WriteLine($"Nombre: {request.NombreLogin}, Número de Cliente: {request.NumeroCliente}");
+            if (!_clienteService.ClienteExiste(request.NumeroCliente, request.NombreLogin))
+            {
+                return Unauthorized(new { mensaje = "Credenciales incorrectas" });
+            }
+
+            return Ok(new { exito = true, mensaje = "Inicio de sesión exitoso", clienteId = _clienteService.Buscar(request.NumeroCliente).NumeroCliente });
         }
 
         [HttpPost]

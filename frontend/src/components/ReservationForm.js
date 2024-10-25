@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReservationService from '../services/ReservationService';
 import WaitlistForm from './WaitlistForm';
+import { useAuth } from '../AuthContext/AuthContext';
 import '../styles/ReservationForm.css';
 
 const ReservationForm = () => {
@@ -9,11 +10,12 @@ const ReservationForm = () => {
     const [fecha, setFecha] = useState('');
     const [mensaje, setMensaje] = useState('');
     const [agregarAListaEspera, setAgregarAListaEspera] = useState(false);
+    const { clienteId } = useAuth();
 
     const manejarReserva = async (e) => {
         e.preventDefault();
         try {
-            const resultado = await ReservationService.crearReserva(numCliente, fecha, numPersonas);
+            const resultado = await ReservationService.crearReserva(clienteId == 0 ? numCliente : clienteId, fecha, numPersonas);
             if (resultado.exito) {
                 setMensaje(`Reserva confirmada en la mesa ${resultado.numeroMesa}`);
             }
@@ -28,16 +30,18 @@ const ReservationForm = () => {
     return (
         <div>
             <form onSubmit={manejarReserva}>
-                <div>
-                    <label>Número de Cliente:</label>
-                    <input 
-                        style={{width: '96%'}}
-                        type="number" 
-                        value={numCliente} 
-                        onChange={(e) => setNumCliente(e.target.value)}
-                        min={1}
-                    />
-                </div>
+                {clienteId == 0 &&
+                    <div>
+                        <label>Número de Cliente:</label>
+                        <input
+                            style={{ width: '96%' }}
+                            type="number"
+                            value={numCliente}
+                            onChange={(e) => setNumCliente(e.target.value)}
+                            min={1}
+                        />
+                    </div>
+                }
                 <div>
                     <label>Número de Personas:</label>
                     <input 

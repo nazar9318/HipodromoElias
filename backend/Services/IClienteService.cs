@@ -5,8 +5,8 @@ namespace HipodromoAPI.Services
 {
     public interface IClienteService
     {
-        //Reserva HacerReserva(int numeroCliente, DateTime fechaReserva, int cantidadPersonas);
         Cliente Buscar(int numeroCliente);
         string ObtenerNombreCliente(int numeroCliente);
+        bool ClienteExiste(int numeroCliente, string nombreCliente);
     }
 }

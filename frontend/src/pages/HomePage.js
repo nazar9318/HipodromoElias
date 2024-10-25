@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import '../styles/HomePage.css';
 
-const HomePage = () => {
+const HomePage = ({ clienteId }) => {
 	return (
 		<div className="home-container">
 			<h1>Bienvenido al Sistema de Reservas del Hipódromo</h1>
