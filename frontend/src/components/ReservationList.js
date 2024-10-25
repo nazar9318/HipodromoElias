@@ -15,7 +15,10 @@ const ReservationList = ({ reservas, eliminarReserva }) => {
         <ul>
             {reservas.map((reserva) => (
                 <li key={reserva.id}>
-                    Cliente: {reserva.nombreCliente}, Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'}, Fecha: {formatearFecha(reserva.fechaReserva)}
+                    Cliente: {reserva.nombreCliente},
+                    Categoria: {reserva.categoriaCliente},
+                    Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'},
+                    Fecha: {formatearFecha(reserva.fechaReserva)}
                     <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
                 </li>
             ))}

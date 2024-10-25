@@ -12,5 +12,6 @@ namespace HipodromoAPI.Models
         public string CategoriaCliente { get; set; }
         public bool EnListaEspera { get; set; }
         public string NombreCliente { get; set; }
+        public int PrioridadCliente { get; set; }
     }
 }

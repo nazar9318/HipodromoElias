@@ -13,6 +13,7 @@ namespace HipodromoApi.Services
         private List<Reserva> reservas = new List<Reserva>();
         private List<Reserva> listaEspera = new List<Reserva>();
         private readonly MesaService _mesaService = new();
+        private readonly CategoriaService _categoriaService = new();
 
         public Reserva CrearReserva(int numeroCliente, string categoriaCliente, string nombre, DateTime fechaReserva, int cantidadPersonas)
         {
@@ -30,6 +31,7 @@ namespace HipodromoApi.Services
             {
                 Id = reservas.Count + 1,
                 NumeroCliente = numeroCliente,
+                PrioridadCliente = _categoriaService.ObtenerPrioridadCategoriaPor(categoriaCliente),
                 FechaReserva = fechaReserva,
                 CategoriaCliente = categoriaCliente,
                 CantidadPersonas = cantidadPersonas,
@@ -57,6 +59,7 @@ namespace HipodromoApi.Services
                 Id = listaEspera.Count + 1,
                 NumeroCliente = numeroCliente,
                 CategoriaCliente = categoriaCliente,
+                PrioridadCliente = _categoriaService.ObtenerPrioridadCategoriaPor(categoriaCliente),
                 FechaReserva = fechaReserva,
                 EnListaEspera = true,
                 CantidadPersonas = cantidadPersonas,
@@ -84,7 +87,7 @@ namespace HipodromoApi.Services
                 // Reasignar la mesa al cliente en la lista de espera más prioritario
                 if (listaEspera.Any())
                 {
-                    var reservaEnEspera = listaEspera.OrderBy(c => c.CategoriaCliente).First();
+                    var reservaEnEspera = listaEspera.OrderBy(r => r.PrioridadCliente).ThenBy(r => r.FechaReserva).First();
                     reservaEnEspera.NumeroMesa = (int)reserva.NumeroMesa;
                     reservaEnEspera.Id = reservas.Count + 1;
                     reservas.Add(reservaEnEspera);

@@ -8,11 +8,12 @@ namespace HipodromoApi.Constants
 {
     public static class CategoriaConstants
     {
-        public const string Diamond = "Diamond";
-        public const string Platinum = "Platinum";
-        public const string Gold = "Gold";
-        public const string Classic = "Classic";
-
-        public static readonly string[] Todos = { Diamond, Platinum, Gold, Classic };
+        public static List<Categoria> Categorias = new List<Categoria>
+        {
+            new Categoria { Prioridad = 1, Nombre = "Diamond" },
+            new Categoria { Prioridad = 2, Nombre = "Platinum" },
+            new Categoria { Prioridad = 3, Nombre = "Gold" },
+            new Categoria { Prioridad = 4, Nombre = "Classic" },
+        };
     }
 }
