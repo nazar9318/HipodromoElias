@@ -17,6 +17,11 @@ namespace HipodromoApi.Services
 
         public Reserva CrearReserva(int numeroCliente, string categoriaCliente, string nombre, DateTime fechaReserva, int cantidadPersonas)
         {
+            if (fechaReserva.Date < DateTime.Now.Date)
+            {
+                throw new FechaInvalidaException();
+            }
+
             if (!PuedeReservar(categoriaCliente, fechaReserva))
             {
                 throw new CategoriaInvalidaException();
@@ -38,9 +43,8 @@ namespace HipodromoApi.Services
                 NombreCliente = nombre
             };
 
-            var mesaDisponible = _mesaService.AsignarMesa(cantidadPersonas);
+            var mesaDisponible = _mesaService.AsignarMesa(reserva, reservas);
 
-            // Asignar mesa si hay disponibilidad
             if (mesaDisponible != null)
             {
                 reserva.NumeroMesa = mesaDisponible.NumeroMesa;
@@ -69,6 +73,24 @@ namespace HipodromoApi.Services
             return reserva;
         }
 
+        public void LiberarMesaEnReserva(Reserva reserva)
+        {
+            if (listaEspera.Any())
+            {
+                var reservaEnEspera = listaEspera
+                                        .Where(r => r.FechaReserva == reserva.FechaReserva && r.CantidadPersonas <= reserva.CantidadPersonas)
+                                        .OrderBy(r => r.PrioridadCliente)
+                                        .FirstOrDefault();
+                if (reservaEnEspera != null)
+                {
+                    reservaEnEspera.NumeroMesa = (int)reserva.NumeroMesa;
+                    reservaEnEspera.Id = reservas.Count + 1;
+                    reservas.Add(reservaEnEspera);
+                    listaEspera.Remove(reservaEnEspera);
+                }
+            }
+        }
+
         public bool EliminarReserva(int idReserva)
         {
             var reserva = reservas.FirstOrDefault(r => r.Id == idReserva);
@@ -79,23 +101,9 @@ namespace HipodromoApi.Services
 
             reservas.Remove(reserva);
 
-            // Liberar mesa si tenía una asignada
             if (reserva.NumeroMesa.HasValue)
             {
-                _mesaService.LiberarMesa((int)reserva.NumeroMesa, reserva.CantidadPersonas);
-
-                // Reasignar la mesa al cliente en la lista de espera más prioritario
-                if (listaEspera.Any())
-                {
-                    var reservaEnEspera = listaEspera
-                                            .Where(r => r.FechaReserva == reserva.FechaReserva)
-                                            .OrderBy(r => r.PrioridadCliente)
-                                            .First();
-                    reservaEnEspera.NumeroMesa = (int)reserva.NumeroMesa;
-                    reservaEnEspera.Id = reservas.Count + 1;
-                    reservas.Add(reservaEnEspera);
-                    listaEspera.Remove(reservaEnEspera);
-                }
+                LiberarMesaEnReserva(reserva);
             }
 
             return true;

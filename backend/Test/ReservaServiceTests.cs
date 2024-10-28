@@ -30,6 +30,25 @@ namespace HipodromoAPI.Tests
         }
 
         [Fact]
+        public void CrearReserva_ShouldAssignSameTable_WhenDatesAreDifferents()
+        {
+            var reserva1 = _reservaService.CrearReserva(1, "Diamond", "Federico", DateTime.Now, 2);
+            var reserva2 = _reservaService.CrearReserva(2, "Diamond", "Daniel", DateTime.Now.AddDays(1), 2);
+
+            Assert.Equal(1, reserva2.NumeroMesa);
+        }
+
+        [Fact]
+        public void CrearReserva_ShouldNotAllowReservations_BeforeDateNow()
+        {
+            var exception = Assert.Throws<FechaInvalidaException>(() =>
+                _reservaService.CrearReserva(1, "Diamond", "Federico", DateTime.Now.AddDays(-1), 2)
+            );
+
+            Assert.Equal("¡No se puede reservar para fechas previas a hoy!", exception.Message);
+        }
+
+        [Fact]
         public void CrearReserva_ShouldReturnEmpty_WhenNoTablesAvailable()
         {
             var numeroCliente1 = 1;
@@ -130,6 +149,45 @@ namespace HipodromoAPI.Tests
 
             _reservaService.EliminarReserva(reserva1.Id);
             Assert.Empty(waitlist);
+        }
+
+        [Fact]
+        public void ReasignarMesaAReservaEnEspera_ShouldNotAssignTableToWaitList_IfDatesDontMatch()
+        {
+            var numeroCliente1 = 1;
+            var categoriaCliente1 = "Diamond";
+            var fechaReserva = DateTime.Now;
+            var fechaEspera = DateTime.Now.AddDays(1);
+            var reserva1 = _reservaService.CrearReserva(numeroCliente1, categoriaCliente1, "Federico", fechaReserva, 1);
+            _reservaService.AgregarAListaEspera(2, "Diamond", "Daniel", fechaEspera, 1);
+
+            _reservaService.EliminarReserva(reserva1.Id);
+
+            Assert.DoesNotContain(_reservaService.ObtenerReservas(), r => r.NumeroMesa == reserva1.NumeroMesa && r.NumeroCliente == 2);
+        }
+
+        [Fact]
+        public void ReasignarMesaAReservaEnEspera_ShouldNotAssignTableToWaitList_IfQuantitiesDontMatch()
+        {
+            var fechaReserva = DateTime.Now;
+            var fechaEspera = DateTime.Now;
+            for (int i = 1; i <= 18; i++)
+            {
+                _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 2);
+            }
+            for (int i = 19; i <= 30; i++)
+            {
+                _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 4);
+            }
+            for (int i = 31; i <= 40; i++)
+            {
+                _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 6);
+            }
+            //Agrego a lista de espera reserva para 6
+            _reservaService.AgregarAListaEspera(2, "Diamond", "Daniel", fechaEspera, 6);
+            //Elimino reserva de 4 comensales
+            _reservaService.EliminarReserva(30);
+            Assert.Single(_reservaService.ObtenerListaEspera());
         }
 
         [Fact]

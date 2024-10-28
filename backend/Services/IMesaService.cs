@@ -1,11 +1,11 @@
 using HipodromoAPI.Models;
+using System.Collections.Generic;
 
 namespace HipodromoApi.Services
 {
     public interface IMesaService
     {
-        Mesa AsignarMesa(int numeroCubiertos);
+        Mesa AsignarMesa(Reserva reserva, List<Reserva> reservas);
         Mesa BuscarMesa(int numeroMesa);
-        void LiberarMesa(int mesaId, int numeroCubiertos);
     }
 }
