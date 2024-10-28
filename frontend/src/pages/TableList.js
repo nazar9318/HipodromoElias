@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import TableService from '../services/TableService';
 import '../styles/List.css';
+import '../styles/MesaList.css';
 
 const TableList = () => {
     const [mesas, setMesas] = useState([]);
@@ -35,13 +36,24 @@ const TableList = () => {
             {mesas.length === 0 ? (
                 <p>No hay mesas disponibles para la fecha seleccionada.</p>
             ) : (
-                <ul>
-                    {mesas.map((mesa) => (
-                        <li key={mesa.numeroMesa}>
-                            Mesa {mesa.numeroMesa} - Capacidad: {mesa.capacidadTotal} - Ocupadas: {mesa.personasOcupando}
-                        </li>
-                    ))}
-                </ul>
+                    <table className="mesa-table">
+                        <thead>
+                            <tr>
+                                <th>Número de Mesa</th>
+                                <th>Capacidad Total</th>
+                                <th>Personas Ocupando</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {mesas.map((mesa) => (
+                                <tr key={mesa.numeroMesa}>
+                                    <td>{mesa.numeroMesa}</td>
+                                    <td>{mesa.capacidadTotal}</td>
+                                    <td>{mesa.personasOcupando}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
             )}
         </div>
     );
