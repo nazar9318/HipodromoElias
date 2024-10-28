@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/ReservationList.css';
+import '../styles/List.css';
 import { useAuth } from '../AuthContext/AuthContext';
 
 const ReservationList = ({ reservas, eliminarReserva }) => {

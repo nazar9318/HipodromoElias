@@ -6,12 +6,11 @@ using System.Linq;
 namespace HipodromoApi.Services
 {
     public class MesaService : IMesaService
-    {        
+    {
         public Mesa AsignarMesa(Reserva reserva, List<Reserva> listaReservas)
         {
             return MesaConstants.Mesas.FirstOrDefault(mesa =>
             {
-                // Sumar las personas que ya han reservado en esta mesa para la fecha específica
                 int personasYaReservadas = listaReservas
                     .Where(r => r.NumeroMesa == mesa.NumeroMesa && r.FechaReserva.Date == reserva.FechaReserva.Date)
                     .Sum(r => r.CantidadPersonas);
@@ -23,6 +22,11 @@ namespace HipodromoApi.Services
         public Mesa BuscarMesa(int numeroMesa)
         {
             return MesaConstants.Mesas.FirstOrDefault(m => m.NumeroMesa == numeroMesa);
+        }
+
+        public List<Mesa> ObtenerMesas()
+        {
+            return MesaConstants.Mesas.ToList();
         }
     }
 }

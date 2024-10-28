@@ -29,6 +29,7 @@ namespace HipodromoApi
             services.AddSingleton<ReservaService>(); 
             services.AddSingleton<ClienteService>();
             services.AddSingleton<MesaService>();
+            services.AddSingleton<CategoriaService>();
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowAll", builder =>

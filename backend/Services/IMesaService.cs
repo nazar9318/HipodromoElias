@@ -7,5 +7,6 @@ namespace HipodromoApi.Services
     {
         Mesa AsignarMesa(Reserva reserva, List<Reserva> reservas);
         Mesa BuscarMesa(int numeroMesa);
+        List<Mesa> ObtenerMesas();
     }
 }

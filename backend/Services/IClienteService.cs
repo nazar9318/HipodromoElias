@@ -1,5 +1,6 @@
 using HipodromoAPI.Models;
 using System;
+using System.Collections.Generic;
 
 namespace HipodromoAPI.Services
 {
@@ -8,5 +9,6 @@ namespace HipodromoAPI.Services
         Cliente Buscar(int numeroCliente);
         string ObtenerNombreCliente(int numeroCliente);
         bool ClienteExiste(int numeroCliente, string nombreCliente);
+        List<Cliente> ObtenerClientes();
     }
 }

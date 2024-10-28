@@ -1,8 +1,10 @@
 ﻿import React from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../AuthContext/AuthContext';
 import '../styles/HomePage.css';
 
-const HomePage = ({ clienteId }) => {
+const HomePage = () => {
+	const { clienteId } = useAuth();
 	return (
 		<div className="home-container">
 			<h1>Bienvenido al Sistema de Reservas del Hipódromo</h1>
@@ -17,6 +19,19 @@ const HomePage = ({ clienteId }) => {
 				<Link to="/waitlist" className="button">
 					Lista de Espera
 				</Link>
+				<Link to="/mesas" className="button">
+					Lista de Mesas
+				</Link>
+				{clienteId === 0 && (
+					<>
+						<Link to="/categorias" className="button">
+							Lista de Categorias
+						</Link>
+						<Link to="/clientes" className="button">
+							Lista de Clientes
+						</Link>
+					</>
+				)}
 			</div>
 		</div>
 	);
