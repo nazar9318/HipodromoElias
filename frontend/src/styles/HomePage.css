@@ -3,22 +3,3 @@
     padding: 2rem;
 }
 
-.home-buttons {
-    display: flex;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
-}
-
-.button {
-    padding: 1rem 2rem;
-    background-color: #4CAF50;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    font-weight: bold;
-}
-
-    .button:hover {
-        background-color: #45a049;
-    }
