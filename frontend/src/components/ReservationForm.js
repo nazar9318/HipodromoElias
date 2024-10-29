@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ReservationService from '../services/ReservationService';
 import WaitlistForm from './WaitlistForm';
+import InputForm from './InputForm';
 import { useAuth } from '../AuthContext/AuthContext';
 import '../styles/ReservationForm.css';
 
@@ -31,37 +32,10 @@ const ReservationForm = () => {
         <div>
             <form onSubmit={manejarReserva}>
                 {clienteId == 0 &&
-                    <div>
-                        <label>Número de Cliente:</label>
-                        <input
-                            style={{ width: '96%' }}
-                            type="number"
-                            value={numCliente}
-                            onChange={(e) => setNumCliente(e.target.value)}
-                            min={1}
-                        />
-                    </div>
+                    <InputForm label="Número de Cliente:" type="number" value={numCliente} onChange={setNumCliente} min={1} />
                 }
-                <div>
-                    <label>Número de Personas:</label>
-                    <input 
-                        style={{width: '96%'}}
-                        type="number" 
-                        value={numPersonas} 
-                        onChange={(e) => setNumPersonas(e.target.value)} 
-                        min={1}
-                    />
-                </div>
-                <div>
-                    <label>Fecha de Reserva:</label>
-                    <input 
-                        style={{width: '96%'}}
-                        type="date" 
-                        value={fecha}
-                        onChange={(e) => setFecha(e.target.value)}
-                        min={1}
-                    />
-                </div>
+                <InputForm label="Número de Personas:" type="number" value={numPersonas} onChange={setNumPersonas} min={1} />
+                <InputForm label="Fecha de Reserva:" type="date" value={fecha} onChange={setFecha} min={1} />
                 <button type="submit">Reservar</button>
                 {mensaje && <p>{mensaje}</p>}
             </form>

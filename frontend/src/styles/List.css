@@ -34,3 +34,7 @@ li button:active {
     background-color: #004085;
     transform: translateY(0);
 }
+
+h1 {
+    justify-self: center;
+}

@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import ClientService from '../services/ClientService';
+import List from '../components/List';
 import '../styles/List.css';
 
-const ClientList = () => {
+const ClientListPage = () => {
     const [clientes, setClientes] = useState([]);
 
     useEffect(() => {
@@ -14,25 +15,22 @@ const ClientList = () => {
         setClientes(ClientesData);
     };
 
+    const columns = ['Nombre', 'Categoría'];
+    const data = clientes.map((cliente) => ({
+        nombre: cliente.nombre,
+        prioridad: cliente.categoria
+    }));
+
     return (
         <div>
             <h1>Clientes</h1>
-            <button onClick={obtenerClientes}>Consultar Clientes</button>
-
-            <h2>Clientes Disponibles</h2>
             {clientes.length === 0 ? (
                 <p>No hay clientes disponibles</p>
             ) : (
-                <ul>
-                    {clientes.map((cliente) => (
-                        <li key={cliente.nombre}>
-                            Cliente: {cliente.nombre} - Categoria: {cliente.categoria}
-                        </li>
-                    ))}
-                </ul>
+                <List columns={columns} data={data} />
             )}
         </div>
     );
 };
 
-export default ClientList;
+export default ClientListPage;
