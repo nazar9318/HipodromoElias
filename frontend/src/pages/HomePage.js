@@ -6,11 +6,11 @@ import image3 from '../assets/tucson-palermo-1200x675.jpg';
 import { useAuth } from '../AuthContext/AuthContext';
 import '../styles/HomePage.css';
 
-const images = [
+/*const images = [
     image1,
     image2,
     image3,
-];
+];*/
 
 const horarios = [
     { dia: 'Lunes a Viernes', horario: '10:00 AM - 10:00 PM' },
@@ -19,16 +19,25 @@ const horarios = [
 ];
 
 const HomePage = () => {
-    const { nombreUsuario } = useAuth();
-    /*const [currentImageIndex, setCurrentImageIndex] = useState(0);
+        const { nombreUsuario } = useAuth();
+        /*const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-    useEffect(() => {
-        const intervalId = setInterval(() => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-        }, 3000);
+        useEffect(() => {
+            const intervalId = setInterval(() => {
+                setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+            }, 3000);
 
-        return () => clearInterval(intervalId);
-    }, []);*/
+            return () => clearInterval(intervalId);
+        }, []);*/
+        useEffect(() => {
+            const reloadCount = sessionStorage.getItem('reloadCount');
+            if (reloadCount < 1) {
+                sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+                window.location.reload();
+            } else {
+                sessionStorage.removeItem('reloadCount');
+            }
+        }, []);
 
 	return (
 		<div className="home-container">

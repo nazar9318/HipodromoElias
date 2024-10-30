@@ -1,4 +1,5 @@
 using HipodromoApi.Constants;
+using HipodromoAPI.Exceptions;
 using HipodromoAPI.Models;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,11 @@ namespace HipodromoApi.Services
     {
         public Mesa AsignarMesa(Reserva reserva, List<Reserva> listaReservas)
         {
+            if (reserva.CantidadPersonas > MesaConstants.Mesas.OrderByDescending(m => m.Cubiertos).FirstOrDefault().Cubiertos)
+            {
+                throw new CapacidadMesaException();
+            }
+
             return MesaConstants.Mesas.FirstOrDefault(mesa =>
             {
                 int personasYaReservadas = listaReservas
