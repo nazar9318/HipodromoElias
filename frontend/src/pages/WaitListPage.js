@@ -15,7 +15,7 @@ const WaitListPage = () => {
     };
 
     return (
-        <div className="list">
+        <div className="list-container">
             <h2>Lista de Reservas</h2>
             <ReservationList reservas={listaEspera} />
         </div>

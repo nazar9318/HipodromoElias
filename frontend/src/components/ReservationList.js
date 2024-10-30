@@ -1,5 +1,6 @@
-import React from 'react';
-import '../styles/List.css';
+﻿import React, { useEffect } from 'react';
+import List from '../components/List';
+import '../styles/Table.css';
 import { useAuth } from '../AuthContext/AuthContext';
 
 const ReservationList = ({ reservas, eliminarReserva }) => {
@@ -12,20 +13,35 @@ const ReservationList = ({ reservas, eliminarReserva }) => {
         return `${dia}/${mes}/${anio}`;
     };
 
+    const columns = ['Cliente', 'Categoría', 'Mesa', 'Fecha', 'Acciones'];
+    const data = reservas.map((reserva) => ({
+        Cliente: reserva.nombreCliente,
+        Categoria: reserva.categoriaCliente,
+        Mesa: reserva.numeroMesa ? reserva.numeroMesa : 'En espera',
+        Fecha: formatearFecha(reserva.fechaReserva),
+        Acciones: <button
+            style={{
+                backgroundColor: reserva.numeroCliente === clienteId || clienteId === 0 ? 'red' : 'gray',
+                cursor: reserva.numeroCliente === clienteId || clienteId === 0 ? 'pointer' : 'not-allowed',
+            }}
+            disabled={reserva.numeroCliente !== clienteId && clienteId !== 0}
+            onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
+    }));
+
+    useEffect(() => {
+        const reloadCount = sessionStorage.getItem('reloadCount');
+        if (reloadCount < 1) {
+            sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+            window.location.reload();
+        } else {
+            sessionStorage.removeItem('reloadCount');
+        }
+    }, []);
+
     return (
-        <ul>
-            {reservas.map((reserva) => (
-                <li key={reserva.id}>
-                    Cliente: {reserva.nombreCliente},
-                    Categoria: {reserva.categoriaCliente},
-                    Mesa {reserva.numeroMesa ? reserva.numeroMesa : 'En espera'},
-                    Fecha: {formatearFecha(reserva.fechaReserva)}
-                    {(reserva.numeroCliente === clienteId || clienteId == 0) && (
-                        <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
-                    )}
-                </li>
-            ))}
-        </ul>
+        <div>
+            <List columns={columns} data={data} />
+        </div>
     );
 };
 

@@ -4,7 +4,7 @@ import List from '../components/List';
 import InputForm from '../components/InputForm';
 import '../styles/ReservationForm.css';
 import '../styles/List.css';
-import '../styles/MesaList.css';
+import '../styles/Table.css';
 
 const TableList = () => {
     const [mesas, setMesas] = useState([]);
@@ -31,7 +31,7 @@ const TableList = () => {
     }));
 
     return (
-        <div>
+        <div className="list-container">
             <form onSubmit={(e) => { e.preventDefault(); obtenerMesas(); }} style={{ display: 'flex', flexDirection: 'column', gap: '15px', width: '50%', justifySelf: 'center' }}>
                 <h1>Disponibilidad de Mesas</h1>
                 <InputForm 

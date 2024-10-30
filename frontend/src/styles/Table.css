@@ -1,0 +1,35 @@
+.list-container {
+    margin: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 60%;
+    justify-self: center;
+}
+
+.table {
+    width: 90%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid black; /* Línea que separa columnas */
+}
+
+.table th {
+    background-color: brown; /* Color de fondo de la cabecera */
+    color: #fff; /* Color del texto de la cabecera */
+    border: 2px solid black;
+}
+
+.table tr {
+    border: 1px solid black;
+}
+
+.table tbody {
+    border: 2px solid black;
+}

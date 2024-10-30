@@ -9,7 +9,7 @@ const InputForm = ({ label, type, value, onChange, min }) => {
                 style={{ width: '96%' }}
                 type={type}
                 value={value}
-                onChange={(e) => onChange(e.target.value)}
+                onChange={onChange}
                 min={min}
             />
         </div>

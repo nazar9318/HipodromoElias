@@ -10,6 +10,7 @@ import TableList from './pages/TableList';
 import CategoryListPage from './pages/CategoryListPage';
 import ClientListPage from './pages/ClientListPage';
 import Navbar from './components/Navbar';
+import './App.css';
 
 function AppContent () {
     const location = useLocation();

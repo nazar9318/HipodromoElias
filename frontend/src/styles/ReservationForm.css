@@ -9,6 +9,10 @@ label {
     color: #495057;
 }
 
+container {
+    background-color: white;
+}
+
 h2 {
     justify-self: center;
 }

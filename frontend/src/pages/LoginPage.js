@@ -2,27 +2,30 @@
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../AuthContext/AuthContext';
 import ReservationService from '../services/ReservationService';
+import Modal from '../components/Modal';
 import '../styles/Login.css';
 
 const LoginPage = () => {
-    const { setClienteId } = useAuth();
+    const { login } = useAuth();
     const [nombreUsuario, setNombreUsuario] = useState('');
     const [numeroUsuario, setNumeroUsuario] = useState('');
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const navigate = useNavigate();
 
     const handleLogin = async () => {
         const exito = await ReservationService.login(nombreUsuario, numeroUsuario);
         if (exito) {
-            setClienteId(exito.clienteId);
+            login(numeroUsuario, nombreUsuario);
             navigate('/home');
         } else {
-            alert("Por favor ingrese nombre y número de usuario válidos");
+            setIsModalOpen(true);
         }
     };
 
     return (
         <div className="login-screen">
-            <h2>Iniciar Sesión</h2>
+            <h2>¡Bienvenido al Sistema de Reservas del Restaurante Tucson!</h2>
+            <h1>Por favor, ingrese sus credenciales para reservar o ver sus reservas</h1>
             <div className="login-form">
                 <input
                     type="text"
@@ -38,6 +41,11 @@ const LoginPage = () => {
                 />
                 <button onClick={handleLogin}>Ingresar</button>
             </div>
+            <Modal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                message={"Por favor ingrese nombre y número de usuario válidos"}
+            />
         </div>
     );
 };

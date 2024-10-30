@@ -1,9 +1,9 @@
 import React from 'react';
-import '../styles/List.css';
+import '../styles/Table.css';
 
 const List = ({ columns, data }) => {
     return (
-        <table className="mesa-table">
+        <table className="table">
             <thead>
                 <tr>
                     {columns.map((col) => (

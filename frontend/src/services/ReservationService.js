@@ -13,12 +13,9 @@ class ReservationService {
             return response.data;
         } catch (error) {
             if (error.response) {
-                const errorMessage = error.response.data.split(':')[1].split('\n')[0].trim();
-                console.error('Error al crear la reserva:', error.response.data.error);
-                alert(`Error: ${errorMessage}`);
+                throw this.handleApiError(error, 'Error en el inicio de sesión');
             } else {
-                console.error('Error al crear la reserva:', error.message);
-                alert(`Error: ${error.message}`);
+                throw this.handleApiError(error, 'Error en el inicio de sesión');
             }
         }
     };
@@ -48,11 +45,23 @@ class ReservationService {
     }
 
     async login(nombre, numero) {
-        const response = await axios.post(`${baseUrl}/login`, {
-            nombreLogin: nombre,
-            numeroCliente: numero,
-        });
-        return response.data;
+        try {
+            const response = await axios.post(`${baseUrl}/login`, {
+                nombreLogin: nombre,
+                numeroCliente: numero,
+            });
+            return response.data;
+        } catch (error) {
+            throw this.handleApiError(error, 'Error en el inicio de sesión');
+        }
+    }
+
+    handleApiError(error, defaultMessage) {
+        if (error.response && error.response.data && error.response.data.error) {
+            return new Error(error.response.data.error);
+        } else {
+            return new Error(defaultMessage || 'Ha ocurrido un error.');
+        }
     }
 }
 

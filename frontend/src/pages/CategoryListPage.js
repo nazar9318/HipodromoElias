@@ -22,7 +22,7 @@ const CategoryListPage = () => {
     }));
 
     return (
-        <div>
+        <div className="list-container">
             <h1>Categorías</h1>
             {categorias.length === 0 ? (
                 <p>No hay categorias disponibles</p>

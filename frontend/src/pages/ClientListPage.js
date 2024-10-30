@@ -22,7 +22,7 @@ const ClientListPage = () => {
     }));
 
     return (
-        <div>
+        <div className="list-container">
             <h1>Clientes</h1>
             {clientes.length === 0 ? (
                 <p>No hay clientes disponibles</p>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReservationList from '../components/ReservationList';
 import ReservationService from '../services/ReservationService';
+import '../styles/Table.css';
 
 const ReservasPage = () => {
     const [reservas, setReservas] = useState([]);
@@ -22,7 +23,7 @@ const ReservasPage = () => {
     };
 
     return (
-        <div className="list">
+        <div className="list-container">
             <h2>Lista de Reservas</h2>
             <ReservationList reservas={reservas} eliminarReserva={eliminarReserva} />
         </div>
