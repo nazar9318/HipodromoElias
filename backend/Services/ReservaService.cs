@@ -115,9 +115,9 @@ namespace HipodromoApi.Services
 
             return categoriaCliente switch
             {
-                "Classic" => Math.Ceiling(tiempoRestante.TotalHours - 48) >= 0,
-                "Gold" => Math.Ceiling(tiempoRestante.TotalHours - 72) >= 0,
-                "Platinum" => Math.Ceiling(tiempoRestante.TotalHours - 96) >= 0,
+                "Classic" => Math.Ceiling(tiempoRestante.TotalHours) <= 48,
+                "Gold" => Math.Ceiling(tiempoRestante.TotalHours) <= 72,
+                "Platinum" => Math.Ceiling(tiempoRestante.TotalHours) <= 96,
                 "Diamond" => true,
                 _ => false,
             };
