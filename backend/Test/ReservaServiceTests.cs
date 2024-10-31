@@ -239,9 +239,9 @@ namespace HipodromoAPI.Tests
         }
 
         [Fact]
-        public void CrearReserva_ShouldNotAllowClassicReservation_WhenLessThan48Hours()
+        public void CrearReserva_ShouldNotAllowClassicReservation_WhenMoreThan48Hours()
         {
-            var fechaReserva = DateTime.Now.AddHours(47);
+            var fechaReserva = DateTime.Now.AddHours(49);
             var numeroCliente = 5;
             var categoriaClassic = CategoriaConstants.Categorias.FirstOrDefault(c => c.Nombre == "Classic").Nombre;
 
@@ -253,9 +253,9 @@ namespace HipodromoAPI.Tests
         }
 
         [Fact]
-        public void CrearReserva_ShouldNotAllowGoldReservation_WhenLessThan72Hours()
+        public void CrearReserva_ShouldNotAllowGoldReservation_WhenMoreThan72Hours()
         {
-            var fechaReserva = DateTime.Now.AddHours(71);
+            var fechaReserva = DateTime.Now.AddHours(73);
             var numeroCliente = 6;
             var categoriaGold = CategoriaConstants.Categorias.FirstOrDefault(c => c.Nombre == "Gold").Nombre;
 
@@ -267,9 +267,9 @@ namespace HipodromoAPI.Tests
         }
 
         [Fact]
-        public void CrearReserva_ShouldNotAllowPlatinumReservation_WhenLessThan96Hours()
+        public void CrearReserva_ShouldNotAllowPlatinumReservation_WhenMoreThan96Hours()
         {
-            var fechaReserva = DateTime.Now.AddHours(95);
+            var fechaReserva = DateTime.Now.AddHours(97);
             var numeroCliente = 7;
             var categoriaPlatinum = CategoriaConstants.Categorias.FirstOrDefault(c => c.Nombre == "Platinum").Nombre;
 
