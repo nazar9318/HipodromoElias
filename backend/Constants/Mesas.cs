@@ -43,11 +43,11 @@ namespace HipodromoApi.Constants
             new Mesa { NumeroMesa = 28, Cubiertos = 4 },
             new Mesa { NumeroMesa = 29, Cubiertos = 4 },
             new Mesa { NumeroMesa = 30, Cubiertos = 4 },
-        
+            new Mesa { NumeroMesa = 31, Cubiertos = 4 },
+            new Mesa { NumeroMesa = 32, Cubiertos = 4 },
+            new Mesa { NumeroMesa = 33, Cubiertos = 4 },
+            
             // Mesas de 6 cubiertos
-            new Mesa { NumeroMesa = 31, Cubiertos = 6 },
-            new Mesa { NumeroMesa = 32, Cubiertos = 6 },
-            new Mesa { NumeroMesa = 33, Cubiertos = 6 },
             new Mesa { NumeroMesa = 34, Cubiertos = 6 },
             new Mesa { NumeroMesa = 35, Cubiertos = 6 },
             new Mesa { NumeroMesa = 36, Cubiertos = 6 },
