@@ -1,13 +1,13 @@
 # Ejecutar:
 
 ## Backend:
-- Tener .Net Core 5.0
+- Tener instalado .Net Core 5.0
 - Ir a carpeta backend
 - dotnet build
 - dotnet run
 
 ## Frontend:
-- Tener node v18
+- Tener instalado node v18 o superior
 - Ir a carpeta frontend
 - npm install
 - npm start
