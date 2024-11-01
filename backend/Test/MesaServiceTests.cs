@@ -39,9 +39,11 @@ namespace HipodromoApi.Tests
                 new Reserva { NumeroMesa = 2, CantidadPersonas = 4, FechaReserva = DateTime.Now }
             };
 
-            var mesa = _mesaService.AsignarMesa(reserva, listaReservas);
+            var exception = Assert.Throws<CapacidadMesaException>(() =>
+                _mesaService.AsignarMesa(reserva, listaReservas)
+            );
 
-            Assert.Null(mesa);
+            Assert.Equal("La reserva supera la cantidad de cubiertos máximos en las mesas.", exception.Message);
         }
     }
 }
