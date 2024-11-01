@@ -35,3 +35,4 @@
 # Autocríticas
 - Estilos: los encuentro muy simples y, revisando la página del restaurante, creo que no van mucho con él. Quedaron por una cuestión de tiempos de desarrollo.
 - Tests: me hubiera gustado pensar y hacer más tests, si bien creo que los que están cubren todo el flujo, creo que podría haber pensado algunos tests más integrales.
+- Despliegue: me hubiera gustado implementar la instalación de dependencias y corrida de la app con docker o cualquier otr automatizador, lamentablemente no hubo tiempo de hacerlo.
