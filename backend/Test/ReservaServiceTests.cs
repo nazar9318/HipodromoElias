@@ -175,11 +175,11 @@ namespace HipodromoAPI.Tests
             {
                 _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 2);
             }
-            for (int i = 19; i <= 30; i++)
+            for (int i = 19; i <= 33; i++)
             {
                 _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 4);
             }
-            for (int i = 31; i <= 40; i++)
+            for (int i = 34; i <= 40; i++)
             {
                 _reservaService.CrearReserva(i, "Diamond", "Federico", DateTime.Now, 6);
             }
